@@ -1,20 +1,33 @@
+class cmp
+{
+    public:
+    bool operator()(ListNode* a, ListNode* b)
+    {
+        return a->val > b->val;
+    }
+};
+
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        vector<int> ans;
-        for (auto value : lists) {
-            ListNode* curr = value;
-            while (curr != nullptr) {
-                ans.push_back(curr->val);
-                curr = curr->next;
+        priority_queue<ListNode*, vector<ListNode*>, cmp> q;
+        ListNode* dummy= new ListNode(-1);
+        ListNode* tail=dummy;
+        for(int i=0;i<lists.size();i++)
+        {
+            if(lists[i]!=NULL)
+            {
+                q.push(lists[i]);
             }
         }
-        sort(ans.begin(), ans.end());
-        ListNode* dummy = new ListNode(0);
-        ListNode* tail = dummy;
-        for (int val : ans) {
-            tail->next = new ListNode(val);
-            tail = tail->next;
+        while(q.size())
+        {
+            ListNode* temp= q.top();
+            tail->next= temp;
+            tail=temp;
+            q.pop();
+            if(temp->next!=NULL)
+                q.push(temp->next);
         }
         return dummy->next;
     }
