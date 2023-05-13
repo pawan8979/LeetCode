@@ -6,7 +6,7 @@ public:
         ListNode* fast = dummy;
         ListNode* slow = dummy;     
 
-        for(int i = 1; i <= n; ++i)
+        for(int i =0; i < n; ++i)
             fast = fast->next;
     
         while(fast->next != NULL)
