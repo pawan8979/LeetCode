@@ -1,36 +1,39 @@
 class Solution {
 public:
     bool backspaceCompare(string s, string t) {
-        stack<char> s1, s2;
+        string ans = "";
+        int hc = 0;
 
-        // for solving string 1
-        for (char c : s) {
-            if (c != '#') {
-                s1.push(c);
-            } else if (!s1.empty()) {
-                s1.pop();
+        // For string 1
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s[i] == '#') {
+                hc++;
+                continue;
+            }
+            if (hc > 0) {
+                hc--;
+            } else {
+                ans = s[i] + ans;
             }
         }
+        s=ans;
+        ans="";
 
-        // for solving string 2
-        for (char c : t) {
-            if (c != '#') {
-                s2.push(c);
-            } else if (!s2.empty()) {
-                s2.pop();
+        // For string 2
+        hc = 0;  // Reset the backspace counter
+        for (int i = t.length() - 1; i >= 0; i--) {
+            if (t[i] == '#') {
+                hc++;
+                continue;
+            }
+            if (hc > 0) {
+                hc--;
+            } else {
+                ans = t[i] + ans;
             }
         }
+        t=ans;
 
-        // compare the modified strings
-        while (!s1.empty() && !s2.empty()) {
-            if (s1.top() != s2.top()) {
-                return false;
-            }
-            s1.pop();
-            s2.pop();
-        }
-
-        // if both stacks are empty, strings are equal after backspacing
-        return s1.empty() && s2.empty();
+        return (s == t);
     }
 };
