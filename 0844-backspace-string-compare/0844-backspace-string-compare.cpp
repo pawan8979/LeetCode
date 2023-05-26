@@ -1,50 +1,36 @@
 class Solution {
 public:
     bool backspaceCompare(string s, string t) {
-        stack<char>s1;
-        stack<char>s2;
+        stack<char> s1, s2;
 
         // for solving string 1
-
-        for(int i=0;i<s.size();i++){
-           
-            if(s[i]>='a' &&s[i]<='z')
-                s1.push(s[i]);
-            
-                else if(s[i]=='#'){
-                    if(!s1.empty())
-                    s1.pop();
-                }
-        }
-         // storing element into string
-
-        string st=" ";
-        while(!s1.empty()){
-            st+=s1.top();
-            s1.pop();
+        for (char c : s) {
+            if (c != '#') {
+                s1.push(c);
+            } else if (!s1.empty()) {
+                s1.pop();
+            }
         }
 
         // for solving string 2
+        for (char c : t) {
+            if (c != '#') {
+                s2.push(c);
+            } else if (!s2.empty()) {
+                s2.pop();
+            }
+        }
 
-         for(int i=0;i<t.size();i++){
-              if(t[i]>='a' && t[i]<='z')
-                s2.push(t[i]);
-              
-               else if(t[i]=='#'){
-                   if(!s2.empty())
-                    s2.pop();
-         }
-    }
-        string st2=" ";
-        while(!s2.empty()){
-            st2+=s2.top();
+        // compare the modified strings
+        while (!s1.empty() && !s2.empty()) {
+            if (s1.top() != s2.top()) {
+                return false;
+            }
+            s1.pop();
             s2.pop();
         }
 
-        if(st==st2)
-        return true;
-        if(st.empty() && st2.empty())
-        return true;
-        return false;
+        // if both stacks are empty, strings are equal after backspacing
+        return s1.empty() && s2.empty();
     }
 };
