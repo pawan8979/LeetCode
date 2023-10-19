@@ -1,6 +1,6 @@
 class Solution {
 public:
-    vector<int> sortedSquares(vector<int>& nums) {
+   vector<int> sortedSquares(vector<int>& nums) {
         vector<int> ans(nums.size());
         int p=0, q=nums.size()-1;
         int k= nums.size()-1;
