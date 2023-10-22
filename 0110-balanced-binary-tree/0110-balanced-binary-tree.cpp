@@ -1,5 +1,5 @@
 class Solution {
-    //TC: O(n^2)
+    //TC: O(n)
 private:
     int height(TreeNode* root)
     {
