@@ -1,6 +1,6 @@
 class Solution {
 public:
-    vector<int> findAnagrams(string s, string p) {
+   vector<int> findAnagrams(string s, string p) {
          int k = p.size();
       int n = s.size();
       vector<int> ans;
@@ -12,7 +12,7 @@ public:
       int cnt = mp.size();
       
       while(j < n){
-          //cal
+          //calculations
           char x = s[j];
           if(mp.find(x) != mp.end()){
               mp[x]--;
