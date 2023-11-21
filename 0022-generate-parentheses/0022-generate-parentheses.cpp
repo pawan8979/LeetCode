@@ -1,7 +1,6 @@
 class Solution {
-public:
+private:
     vector<string> ans;
-    
     void fun(int left,int right,string s)
     {
         if(left<0||right<0)
@@ -18,10 +17,10 @@ public:
 	   
        if(right>left)
 	   {
-	   fun(left,right-1,s+")");
+	        fun(left,right-1,s+")");
 	   }
     }
-    
+public:    
     vector<string> generateParenthesis(int n) {
         fun(n,n,"");
         return ans;
