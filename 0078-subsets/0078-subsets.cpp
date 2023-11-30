@@ -14,6 +14,7 @@ private:
         int element = nums[index];
         output.push_back(element);
         helper(index+1, nums, ans, output);
+        output.pop_back();
     }
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
