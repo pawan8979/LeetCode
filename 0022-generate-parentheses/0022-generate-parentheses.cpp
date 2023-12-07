@@ -1,28 +1,19 @@
 class Solution {
 private:
-    vector<string> ans;
-    void fun(int left,int right,string s)
+    void helper(int o, int c, string current, vector<string>& ans, int n)
     {
-        if(left<0||right<0)
+        if(current.size()==2*n)
         {
-          return;
+            ans.push_back(current);
+            return;
         }
-        if(left==0 and right==0)
-        {
-          ans.push_back(s);
-          return;
-        }
-      
-       fun(left-1,right,s+"(");
-	   
-       if(right>left)
-	   {
-	        fun(left,right-1,s+")");
-	   }
+        if(o<n)  helper(o+1,c,current+"(",ans,n);
+        if(c<o)  helper(o,c+1,current+")",ans,n);
     }
-public:    
+public:
     vector<string> generateParenthesis(int n) {
-        fun(n,n,"");
+        vector<string> ans;
+        helper(0,0,"",ans,n);
         return ans;
     }
 };
